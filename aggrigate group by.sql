@@ -1,0 +1,17 @@
+use sakila;
+show tables;
+select count(*) from payment where amount =2.99;
+select amount,count(*) from payment group by amount;
+select customer_id,sum(amount) from payment where amount>3 group  by customer_id;
+select payment_date,month(payment_date) from payment;
+select customer_id,count(amount),payment_date,month(payment_date) from payment where month(payment_date)=5 group by customer_id;
+select staff_id,max(amount),avg(amount),sum(amount) from payment group by staff_id;
+select staff_id,max(amount),avg(amount),sum(amount) from payment where customer_id %2=0 group by staff_id;
+select amount,count(*) from payment  where staff_id=1 group by amount having count(*)>30;
+select * from payment;
+select avg(amount),sum(amount),count(customer_id),extract( month from payment_date) from payment where staff_id=1 or staff_id=2 group by extract(month from payment_date) having count(customer_id);
+select avg(amount),sum(amount),count(customer_id),extract( month from payment_date),extract(year from payment_date) from payment where staff_id=1 or staff_id=2 group by extract(month from payment_date),extract(year from payment_date) having count(customer_id);
+select * from payment order by amount;
+use sakila;
+show tables;
+select * from payment order by customer_id,amount desc;
